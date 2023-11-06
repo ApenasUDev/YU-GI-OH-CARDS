@@ -20,7 +20,7 @@ def home(request):
                     cards.append(cards_info)
 
                 # Use slice para pegar apenas os primeiros 25 itens
-                cards = cards[:25]
+                cards = cards[:500]
 
                 contexto = {"cards": cards}
     except requests.exceptions.RequestException as e:

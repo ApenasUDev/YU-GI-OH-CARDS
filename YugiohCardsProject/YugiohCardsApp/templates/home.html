@@ -1,8 +1,19 @@
 {% extends 'base.html' %}
-
 {% block title %} Home Page {% endblock %}
-
 {% block content %}
+<style>
+    ul {
+    list-style: none; /* Remova os marcadores da lista */
+    display: flex; /* Use display flex para alinhar os elementos lado a lado */
+    flex-wrap: wrap; /* Permita que os elementos quebrem para a próxima linha quando não couberem mais na largura */
+}
+li {
+    margin-right: 10px; /* Adicione margem à direita para separar as imagens */
+}
+img {
+    max-width: 100px; /* Limite a largura máxima das imagens */
+}
+</style>
 <div>
     <div>
         <h1>Lista de Cards</h1>
