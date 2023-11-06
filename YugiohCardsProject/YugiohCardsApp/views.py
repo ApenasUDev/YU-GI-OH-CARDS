@@ -4,7 +4,7 @@ import requests
 
 def home(request):
     base_url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
-        
+  
     try:
             response = requests.get(base_url)
             response.raise_for_status()
@@ -20,9 +20,10 @@ def home(request):
                     cards.append(cards_info)
 
                 # Use slice para pegar apenas os primeiros 25 itens
-                cards = cards[:500]
+                cards = cards[:125]
 
                 contexto = {"cards": cards}
+ 
     except requests.exceptions.RequestException as e:
             print(f"Erro na solicitação HTTP: {e}")
             contexto = {"cards": []}  # Lista vazia em caso de erro
