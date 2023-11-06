@@ -15,7 +15,17 @@ def home(request):
             if data["data"]:
                 for resultados in data["data"]:
                     cards_info = {
+                        "id": resultados["id"],
                         "image": resultados["card_images"][0]["image_url"],
+                        "name": resultados["name"],
+                        "type": resultados["type"],
+                        "frameType": resultados["frameType"],
+                        "desc": resultados["desc"],
+                        # "atk": resultados["atk"],
+                        # "def": resultados["def"],
+                        # "level": resultados["level"],
+                        "race": resultados["race"],
+                        # "attribute": resultados["attribute"],
                     }
                     cards.append(cards_info)
 
