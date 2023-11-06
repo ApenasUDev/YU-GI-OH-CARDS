@@ -44,6 +44,7 @@ def home(request):
                 cards = cards[:125]
 
                 contexto = {"cards": cards}
+                print(len(cards))
  
     except requests.exceptions.RequestException as e:
             print(f"Erro na solicitação HTTP: {e}")

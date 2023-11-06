@@ -21,7 +21,7 @@
         footer {
             background: #000000;
             width: 100%;
-            position:static;
+            position: static;
             bottom: 0;
             text-align: center;
             color: white;
@@ -47,7 +47,12 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Decks</a>
                         </li>
-                </div>
+                    </div>
+                    <form class="d-flex">
+                        {% csrf_token %}
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
             </div>
         </nav>
     </div>
