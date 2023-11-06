@@ -3,4 +3,4 @@
 
 # Tecnologias usadas no projeto.
     - FrameWork Django.
-    - Biblioteca python request.
+    - Biblioteca python requests.
