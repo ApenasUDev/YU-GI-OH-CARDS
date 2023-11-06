@@ -14,19 +14,30 @@ def home(request):
 
             if data["data"]:
                 for resultados in data["data"]:
-                    cards_info = {
-                        "id": resultados["id"],
-                        "image": resultados["card_images"][0]["image_url"],
-                        "name": resultados["name"],
-                        "type": resultados["type"],
-                        "frameType": resultados["frameType"],
-                        "desc": resultados["desc"],
-                        # "atk": resultados["atk"],
-                        # "def": resultados["def"],
-                        # "level": resultados["level"],
-                        "race": resultados["race"],
-                        # "attribute": resultados["attribute"],
-                    }
+                    if resultados["type"] == "Trap Card" or resultados["type"] == "Spell Card":
+                        cards_info = {
+                            "id": resultados["id"],
+                            "image": resultados["card_images"][0]["image_url"],
+                            "name": resultados["name"],
+                            "type": resultados["type"],
+                       
+                            "desc": resultados["desc"],                     
+                            "race": resultados["race"],
+                           
+                        }
+                    else:
+                        cards_info = {
+                            "id": resultados["id"],
+                            "image": resultados["card_images"][0]["image_url"],
+                            "name": resultados["name"],
+                            "type": resultados["type"],
+                            "desc": resultados["desc"],
+                            "atk": resultados.get("atk", None),  # Use get() para obter "atk" com um valor padrão se estiver ausente
+                            "def": resultados.get("def", None),  # Use get() para obter "def" com um valor padrão se estiver ausente
+                            "level": resultados.get("level", None),  # Use get() para obter "level" com um valor padrão se estiver ausente
+                            "race": resultados["race"],
+                            "attribute": resultados.get("attribute",None),
+                        }
                     cards.append(cards_info)
 
                 # Use slice para pegar apenas os primeiros 25 itens

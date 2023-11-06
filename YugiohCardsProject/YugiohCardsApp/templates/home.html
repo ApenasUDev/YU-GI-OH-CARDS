@@ -78,24 +78,48 @@
                 const typeData = image.getAttribute("data-type-data");
                 const decData = image.getAttribute("data-desc-data");
                 const raceData = image.getAttribute("data-race-data");
+                const atkData = image.getAttribute("data-atk-data");
+                const defData = image.getAttribute("data-def-data");
+                const levelData = image.getAttribute("data-level-data");
+                const attributeData = image.getAttribute("data-attribute-data");
 
                 // Atualize o conteúdo do modal com os dados da imagem
-                modalContent.innerHTML = `<div>
+                if (typeData == "Trap Card" || typeData == "Spell Card") {
+                    modalContent.innerHTML = `<div>
                         <h2>Detalhes do Card</h2>
                         <div class="flex-container">
                             <div>
                                 <img src="${imageData}" alt="Card Image" style="max-width: 450px; ">
                             </div>
-                            <div>
-                                <h2>id: <p>${idData}</p></h2>
-                                <h2>nome: <p>${nameData}</p></h2>
-                                <h2>tipo: <p>${typeData}</p></h2>
+                                <div>
+                                <h2>id: ${idData} | nome: ${nameData}</h2>
+                                <h2>tipo: ${typeData}</h2>
+                                <h2>raça: ${raceData}</h2>
                                 <h2>descrição: <p>${decData}</p></h2>
-                                <h2>raça: <p>${raceData}</p></h2>
                             </div>
+                    `;
+                } else {
+                    modalContent.innerHTML = `<div>
+                        <h2>Detalhes do Card</h2>
+                        <div class="flex-container">
+                            <div>
+                                <img src="${imageData}" alt="Card Image" style="max-width: 450px; ">
+                            </div>
+                                <div>
+                                <h2>id: ${idData} | nome: ${nameData}</h2>
+                                <h2>tipo: ${typeData}</h2>
+                                <h2>raça: ${raceData}</h2>
+                                <h2>atk: ${atkData} | def: ${defData}</h2>
+                                <h2>level: ${levelData}</h2>
+                                <h2>atributo: ${attributeData}</h2>
+                                <h2>descrição: <p>${decData}</p></h2>
+                            </div>
+                               
                         </div>
                     </div>
                     `;
+                }
+
             });
         });
 
@@ -120,7 +144,8 @@
                 <img src="{{ card.image }}" alt="Card Image" class="card-image" data-id-data="{{ card.id }}"
                     data-image-data="{{ card.image }}" data-nome-data="{{card.name}}" data-type-data="{{ card.type }}"
                     data-frameType-data="{{ card.frameType }}" data-desc-data="{{ card.desc }}"
-                    data-race-data="{{ card.race }}">
+                    data-race-data="{{ card.race }}" data-atk-data="{{ card.atk }}" data-def-data="{{ card.def }}"
+                    data-attribute-data="{{ card.attribute }}" data-level-data="{{ card.level }}">
             </li>
             {% endfor %}
         </ul>
