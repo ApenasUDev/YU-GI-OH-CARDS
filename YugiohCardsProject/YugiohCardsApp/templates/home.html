@@ -17,6 +17,17 @@
         cursor: pointer;
     }
 
+    .flex-container {
+        display: flex;
+        align-items: center;
+        /* Alinhar verticalmente os elementos internos */
+    }
+
+    .flex-container>div {
+        flex: 1;
+        /* Distribuir o espaço igualmente entre as divs internas */
+    }
+
     .modal {
         display: none;
         position: fixed;
@@ -44,6 +55,10 @@
         right: 10px;
         cursor: pointer;
     }
+
+    .modal-content>div {
+        display: inline-block;
+    }
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -63,16 +78,24 @@
                 const typeData = image.getAttribute("data-type-data");
                 const decData = image.getAttribute("data-desc-data");
                 const raceData = image.getAttribute("data-race-data");
-              
+
                 // Atualize o conteúdo do modal com os dados da imagem
-                modalContent.innerHTML = `<h2>Detalhes do Card</h2>
-                <img src="${imageData}" alt="Card Image"> 
-                <h2>id: <p>${idData}</p></h2>
-                <h2>nome: <p>${nameData}</p></h2>
-                <h2>tipo: <p>${typeData}</p></h2>
-                <h2>descrição: <p>${decData}</p></h2>
-                <h2>raça: <p>${raceData}</p></h2>
-                `;
+                modalContent.innerHTML = `<div>
+                        <h2>Detalhes do Card</h2>
+                        <div class="flex-container">
+                            <div>
+                                <img src="${imageData}" alt="Card Image" style="max-width: 450px; ">
+                            </div>
+                            <div>
+                                <h2>id: <p>${idData}</p></h2>
+                                <h2>nome: <p>${nameData}</p></h2>
+                                <h2>tipo: <p>${typeData}</p></h2>
+                                <h2>descrição: <p>${decData}</p></h2>
+                                <h2>raça: <p>${raceData}</p></h2>
+                            </div>
+                        </div>
+                    </div>
+                    `;
             });
         });
 
