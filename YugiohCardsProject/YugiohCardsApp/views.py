@@ -54,8 +54,24 @@ def home(request):
 
 def buscar_card(request):
     nome_card = request.GET.get('nome_card', '') 
-    BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={nome_card}"
     try:
+                       # Acesse o valor do botão de rádio selecionado usando request.GET
+            tipo_selecionado = request.GET.get("tipo")
+                        
+                        # Agora, você pode usar o valor para tomar a ação necessária
+            if tipo_selecionado == "opcao1":
+                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={nome_card}"
+                            
+                        
+            elif tipo_selecionado == "opcao2":
+                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?attribute={nome_card}"
+                            
+                        
+            elif tipo_selecionado == "opcao3":      
+                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?race={nome_card}"
+            else:
+                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={nome_card}"
+                
             response = requests.get(BASE_URL)
             response.raise_for_status()
             data = response.json()
@@ -64,6 +80,7 @@ def buscar_card(request):
 
             if data["data"]:
                 for resultados in data["data"]:
+                            
                     if resultados["type"] == "Trap Card" or resultados["type"] == "Spell Card":
                         cards_info = {
                             "id": resultados["id"],
