@@ -61,17 +61,12 @@ def buscar_card(request):
                         # Agora, você pode usar o valor para tomar a ação necessária
             if tipo_selecionado == "opcao1":
                         BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={nome_card}"
-                            
-                        
             elif tipo_selecionado == "opcao2":
                         BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?attribute={nome_card}"
-                            
-                        
             elif tipo_selecionado == "opcao3":      
                         BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?race={nome_card}"
             else:
                         BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={nome_card}"
-                
             response = requests.get(BASE_URL)
             response.raise_for_status()
             data = response.json()
@@ -116,3 +111,7 @@ def buscar_card(request):
             contexto = {"cards": []}  # Lista vazia em caso de erro
 
     return render(request, 'home.html', contexto)
+
+
+def deck(request):
+    return render(request,'deck.html')
