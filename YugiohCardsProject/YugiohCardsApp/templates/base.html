@@ -48,11 +48,13 @@
                             <a class="nav-link active" aria-current="page" href="#">Decks</a>
                         </li>
                     </div>
-                    <form class="d-flex">
+                    <form class="d-flex" method="get" action="{% url 'buscar' %}">
                         {% csrf_token %}
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control me-2" type="search" name="nome_card" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
+                    
+            
             </div>
         </nav>
     </div>
