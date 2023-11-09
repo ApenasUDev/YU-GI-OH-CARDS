@@ -1,19 +1,9 @@
 from django.shortcuts import render
 import requests
+
 # Create your views here.
-
-def home(request):
-    base_url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
-  
-    try:
-            response = requests.get(base_url)
-            response.raise_for_status()
-            data = response.json()
-            
-            cards = []  # Lista para armazenar os dados dos cards
-
-            if data["data"]:
-                for resultados in data["data"]:
+# criando funçõs par filtrar os cards
+def FilterCard(resultados):
                     if resultados["type"] == "Trap Card" or resultados["type"] == "Spell Card":
                         cards_info = {
                             "id": resultados["id"],
@@ -38,6 +28,21 @@ def home(request):
                             "race": resultados["race"],
                             "attribute": resultados.get("attribute",None),
                         }
+                    return cards_info
+def home(request):
+    base_url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
+  
+    try:
+            response = requests.get(base_url)
+            response.raise_for_status()
+            data = response.json()
+            
+            cards = []  # Lista para armazenar os dados dos cards
+
+            if data["data"]:
+                for resultados in data["data"]:
+                    cards_info = FilterCard(resultados)
+
                     cards.append(cards_info)
 
                 # Use slice para pegar apenas os primeiros 25 itens
@@ -60,7 +65,7 @@ def buscar_card(request):
                         
                         # Agora, você pode usar o valor para tomar a ação necessária
             if tipo_selecionado == "opcao1":
-                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={nome_card}"
+                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?type={nome_card}"
             elif tipo_selecionado == "opcao2":
                         BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?attribute={nome_card}"
             elif tipo_selecionado == "opcao3":      
@@ -76,32 +81,9 @@ def buscar_card(request):
             if data["data"]:
                 for resultados in data["data"]:
                             
-                    if resultados["type"] == "Trap Card" or resultados["type"] == "Spell Card":
-                        cards_info = {
-                            "id": resultados["id"],
-                            "image": resultados["card_images"][0]["image_url"],
-                            "name": resultados["name"],
-                            "type": resultados["type"],
-                            "desc": resultados["desc"],                     
-                            "race": resultados["race"],
-                           
-                        }
-                    else:
-                        cards_info = {
-                            "id": resultados["id"],
-                            "image": resultados["card_images"][0]["image_url"],
-                            "name": resultados["name"],
-                            "type": resultados["type"],
-                            "desc": resultados["desc"],
-                            "atk": resultados.get("atk", None),  # Use get() para obter "atk" com um valor padrão se estiver ausente
-                            "def": resultados.get("def", None),  # Use get() para obter "def" com um valor padrão se estiver ausente
-                            "level": resultados.get("level", None),  # Use get() para obter "level" com um valor padrão se estiver ausente
-                            "race": resultados["race"],
-                            "attribute": resultados.get("attribute",None),
-                        }
-                    cards.append(cards_info)
+                    cards_info = FilterCard(resultados)
 
-  
+                    cards.append(cards_info)
 
                 contexto = {"cards": cards}
               
@@ -112,6 +94,3 @@ def buscar_card(request):
 
     return render(request, 'home.html', contexto)
 
-
-def deck(request):
-    return render(request,'deck.html')
