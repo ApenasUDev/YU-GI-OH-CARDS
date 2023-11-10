@@ -4,6 +4,7 @@ import requests
 # Create your views here.
 # criando funçõs par filtrar os cards
 def FilterCard(resultados):
+ 
                     if resultados["type"] == "Trap Card" or resultados["type"] == "Spell Card":
                         cards_info = {
                             "id": resultados["id"],
