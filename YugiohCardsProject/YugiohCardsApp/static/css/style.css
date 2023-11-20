@@ -56,3 +56,19 @@
     .modal-content>div {
         display: inline-block;
     }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    .step-links a {
+        color: #007bff;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+    
+    .step-links a:hover {
+        background-color: #007bff;
+        color: white;
+    }

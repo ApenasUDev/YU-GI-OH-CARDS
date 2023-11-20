@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage
 import requests
 
 # Create your views here.
@@ -34,27 +35,35 @@ def home(request):
     base_url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
   
     try:
-            response = requests.get(base_url)
-            response.raise_for_status()
-            data = response.json()
-            
-            cards = []  # Lista para armazenar os dados dos cards
+        response = requests.get(base_url)
+        response.raise_for_status()
+        data = response.json()
+        
+        cards = []  # Lista para armazenar os dados dos cards
 
-            if data["data"]:
-                for resultados in data["data"]:
-                    cards_info = FilterCard(resultados)
+        if data["data"]:
+            for resultados in data["data"]:
+                cards_info = FilterCard(resultados)
+                cards.append(cards_info)
 
-                    cards.append(cards_info)
+            # # Use slice para pegar apenas os primeiros 125 itens
+            # cards = cards[:125]
 
-                # Use slice para pegar apenas os primeiros 25 itens
-                cards = cards[:125]
+            # Configuração da paginação
+            paginator = Paginator(cards, 150)  # 10 itens por página
+            page_number = request.GET.get('page', 1)
 
-                contexto = {"cards": cards}
-                print(len(cards))
+            try:
+                cards = paginator.page(page_number)
+            except EmptyPage:
+                cards = paginator.page(paginator.num_pages)
+
+            contexto = {"cards": cards}
+            print(len(cards))
  
     except requests.exceptions.RequestException as e:
-            print(f"Erro na solicitação HTTP: {e}")
-            contexto = {"cards": []}  # Lista vazia em caso de erro
+        print(f"Erro na solicitação HTTP: {e}")
+        contexto = {"cards": []}  # Lista vazia em caso de erro
 
     return render(request, 'home.html', contexto)
 

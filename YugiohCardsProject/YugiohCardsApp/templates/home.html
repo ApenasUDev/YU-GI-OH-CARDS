@@ -8,7 +8,7 @@
 <div>
     <div>
         <h1>Lista de Cards</h1>
-
+      
         {% if cards %}
         <ul>
             {% for card in cards %}
@@ -19,24 +19,32 @@
                     data-race-data="{{ card.race }}" data-atk-data="{{ card.atk }}" data-def-data="{{ card.def }}"
                     data-attribute-data="{{ card.attribute }}" data-level-data="{{ card.level }}">
             </li>
-
+           
             {% endfor %}
         </ul>
         {% else %}
         <p>Nenhum card disponível no momento.</p>
         {% endif %}
-
-
+    
+        <div class="pagination">
+            <span class="step-links">
+                {% if cards.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ cards.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Página {{ cards.number }} de {{ cards.paginator.num_pages }}.
+                </span>
+        
+                {% if cards.has_next %}
+                    <a href="?page={{ cards.next_page_number }}">next</a>
+                    <a href="?page={{ cards.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
-    <div>
 
-        <li><button>1</button></li>
-        <li><button>2</button></li>
-        <li><button>3</button></li>
-        <li><button>5</button></li>
-        <li><button>6</button></li>
-
-    </div>
     <div id="modal" class="modal">
         <div id="modal-content" class="modal-content">
             <span class="close">&times;</span>
