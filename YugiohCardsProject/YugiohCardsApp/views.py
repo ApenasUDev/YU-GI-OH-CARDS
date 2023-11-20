@@ -104,3 +104,5 @@ def buscar_card(request):
 
     return render(request, 'home.html', contexto)
 
+def deck(request):
+    return render(request,'deck.html')
