@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage
 import requests
 from random import randint
+from YugiohCardsApp.models import SeusCads
 # Create your views here.
 # criando funçõs par filtrar os cards
 def FilterCard(resultados):
@@ -104,7 +105,7 @@ def buscar_card(request):
 
     return render(request, 'home.html', contexto)
 
-def deck(request):
+def comprar(request):
     base_url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
     
     try:
@@ -129,11 +130,15 @@ def deck(request):
                 for _ in range(num_cards_to_generate):
                     n = randint(0, len(cards) - 1)
                     cards_new.append(cards.pop(n))  # Remover a carta da lista original para evitar repetições
-
+                for idc in cards_new:
+                        idcart = idc['id']
+                        print(idcart)
+                        seucard = SeusCads(id_card=idcart)
+                        seucard.save()
         contexto = {"cards": cards_new}
 
     except requests.exceptions.RequestException as e:
         print(f"Erro na solicitação HTTP: {e}")
         contexto = {"cards": []}  # Lista vazia em caso de erro
 
-    return render(request, 'deck.html', contexto)
+    return render(request, 'comprar.html', contexto)

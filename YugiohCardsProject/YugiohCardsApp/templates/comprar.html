@@ -6,7 +6,7 @@
 {% block content %}
 <script src="{% static 'js/script.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<form action="{% url 'deck' %}" method="post">
+<form action="{% url 'comprar' %}" method="post">
 {% csrf_token %}
     <button name="comprar_card" value="comprar"> comprar card</button>
 
@@ -26,7 +26,7 @@
         {% endfor %}
     </ul>
     {% else %}
-    <p>Nenhum card disponível no momento.</p>
+    <p>.</p>
     {% endif %}
 </div>
 <div id="modal" class="modal">
