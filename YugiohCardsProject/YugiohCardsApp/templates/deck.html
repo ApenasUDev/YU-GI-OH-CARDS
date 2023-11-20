@@ -3,5 +3,8 @@
 {% block title %} DECKS {% endblock %}
 
 {% block content %}
-<h1>teste de deck</h1>
+<form action="{% url 'deck' %}" method="post">
+{% csrf_token %}
+    <button name="comprar_card" value="comprar"> comprar card</button>
+</form>
 {% endblock %}

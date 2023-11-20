@@ -105,4 +105,8 @@ def buscar_card(request):
     return render(request, 'home.html', contexto)
 
 def deck(request):
+    if request.method == "POST":
+        button = request.POST.get('comprar_card')
+        if button == 'comprar':
+            print("teste comprar")
     return render(request,'deck.html')
