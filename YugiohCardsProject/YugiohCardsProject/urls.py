@@ -23,5 +23,6 @@ urlpatterns = [
     path('',views.home,name="home"),
     path('buscar/',views.buscar_card,name="buscar"),
     path('compar/',views.comprar,name="comprar"),
+    path('cards/',views.seucard,name="seucard"),
     path('admin/', admin.site.urls),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

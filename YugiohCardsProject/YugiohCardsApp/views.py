@@ -142,3 +142,30 @@ def comprar(request):
         contexto = {"cards": []}  # Lista vazia em caso de erro
 
     return render(request, 'comprar.html', contexto)
+
+
+def seucard(request):
+    seucard =[]
+    seucard.append(SeusCads.objects.all())
+    BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?id={seucard}"
+    try:
+        response = requests.get(BASE_URL)
+        response.raise_for_status()
+        data = response.json()
+                
+        cards = []  # Lista para armazenar os dados dos cards
+
+        if data["data"]:
+            for resultados in data["data"]:
+                                
+                cards_info = FilterCard(resultados)
+
+                cards.append(cards_info)
+
+                contexto = {"cards": cards}
+                
+    
+    except requests.exceptions.RequestException as e:
+            print(f"Erro na solicitação HTTP: {e}")
+            contexto = {"cards": []}  # Lista vazia em caso de erro
+    return render(request,'seucard.html',contexto)
