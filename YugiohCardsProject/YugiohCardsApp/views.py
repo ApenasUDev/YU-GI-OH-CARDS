@@ -145,27 +145,26 @@ def comprar(request):
 
 
 def seucard(request):
-    seucard =[]
-    seucard.append(SeusCads.objects.all())
-    BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?id={seucard}"
-    try:
-        response = requests.get(BASE_URL)
-        response.raise_for_status()
-        data = response.json()
-                
-        cards = []  # Lista para armazenar os dados dos cards
+   
+    seucards=SeusCads.objects.all()
+    cards = []  # Lista para armazenar os dados dos cards
 
-        if data["data"]:
-            for resultados in data["data"]:
-                                
-                cards_info = FilterCard(resultados)
+    for seucard in seucards:
+        cardid = seucard.id_card
+        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?id={cardid}"
 
-                cards.append(cards_info)
+        try:
+            response = requests.get(BASE_URL)
+            response.raise_for_status()
+            data = response.json()
 
-                contexto = {"cards": cards}
-                
-    
-    except requests.exceptions.RequestException as e:
+            if data["data"]:
+                for card_info in data["data"]:
+                    filtered_card_info = FilterCard(card_info)
+                    cards.append(filtered_card_info)
+
+        except requests.exceptions.RequestException as e:
             print(f"Erro na solicitação HTTP: {e}")
-            contexto = {"cards": []}  # Lista vazia em caso de erro
-    return render(request,'seucard.html',contexto)
+
+    contexto = {"cards": cards}
+    return render(request, 'seucard.html', contexto)
