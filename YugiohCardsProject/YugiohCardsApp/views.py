@@ -32,15 +32,17 @@ def FilterCard(resultados):
                             "attribute": resultados.get("attribute",None),
                         }
                     return cards_info
+def responseApI(base):
+        response = requests.get(base)
+        response.raise_for_status()
+        data = response.json()
+        return data
 def home(request):
     base_url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
   
     try:
-        response = requests.get(base_url)
-        response.raise_for_status()
-        data = response.json()
-        
         cards = []  # Lista para armazenar os dados dos cards
+        data =responseApI(base_url)
 
         if data["data"]:
             for resultados in data["data"]:
@@ -83,12 +85,9 @@ def buscar_card(request):
                         BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?race={nome_card}"
             else:
                         BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={nome_card}"
-            response = requests.get(BASE_URL)
-            response.raise_for_status()
-            data = response.json()
-            
-            cards = []  # Lista para armazenar os dados dos cards
 
+            cards = []  # Lista para armazenar os dados dos cards
+            data = responseApI(BASE_URL)
             if data["data"]:
                 for resultados in data["data"]:
                             
@@ -109,12 +108,9 @@ def comprar(request):
     base_url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
     
     try:
-        response = requests.get(base_url)
-        response.raise_for_status()
-        data = response.json()
 
         cards = []  # Lista para armazenar os dados dos cards
-
+        data = responseApI(base_url)
         if "data" in data and data["data"]:
             for resultados in data["data"]:
                 cards_info = FilterCard(resultados)
@@ -154,10 +150,7 @@ def seucard(request):
         BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?id={cardid}"
 
         try:
-            response = requests.get(BASE_URL)
-            response.raise_for_status()
-            data = response.json()
-
+            data = responseApI(BASE_URL)
             if data["data"]:
                 for card_info in data["data"]:
                     filtered_card_info = FilterCard(card_info)
