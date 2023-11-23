@@ -17,7 +17,8 @@
                     data-image-data="{{ card.image }}" data-nome-data="{{card.name}}" data-type-data="{{ card.type }}"
                     data-frameType-data="{{ card.frameType }}" data-desc-data="{{ card.desc }}"
                     data-race-data="{{ card.race }}" data-atk-data="{{ card.atk }}" data-def-data="{{ card.def }}"
-                    data-attribute-data="{{ card.attribute }}" data-level-data="{{ card.level }}">
+                    data-attribute-data="{{ card.attribute }}" data-level-data="{{ card.level }}"
+                    onclick="addToDeck(this);">
             </li>
 
             {% endfor %}
