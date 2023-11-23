@@ -1,0 +1,16 @@
+
+    .card-container {
+        display: flex;
+    }
+
+    .card-list {
+        width: 70%;
+        /* ou outra largura desejada */
+        margin-right: 20px;
+        /* ou outra margem desejada */
+    }
+
+    .deck-builder {
+        width: 30%;
+        /* ou outra largura desejada */
+    }

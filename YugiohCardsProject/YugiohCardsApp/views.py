@@ -32,11 +32,13 @@ def FilterCard(resultados):
                             "attribute": resultados.get("attribute",None),
                         }
                     return cards_info
+
 def responseApI(base):
         response = requests.get(base)
         response.raise_for_status()
         data = response.json()
         return data
+
 def home(request):
     base_url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
   
@@ -138,7 +140,6 @@ def comprar(request):
         contexto = {"cards": []}  # Lista vazia em caso de erro
 
     return render(request, 'comprar.html', contexto)
-
 
 def seucard(request):
    
