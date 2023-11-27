@@ -1,0 +1,11 @@
+
+.navbar {
+    border-radius: 0 0 50% 50%;
+}
+
+.navbar-brand {
+    margin: 0; /* Remove default margin for better alignment */
+}
+body {
+ background-color: rgb(26, 83, 50);
+}
