@@ -39,7 +39,7 @@ def responseApI(base):
 def homepage(request):
     return render(request,'home/homepage.html')
 def visucards(request):
-    base_url = "https://db.ygoprodeck.com/api/v7/cardinfo.php"
+    base_url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?language=pt"
   
     try:
         cards = []  # Lista para armazenar os dados dos cards
@@ -79,13 +79,13 @@ def buscar_card(request):
                         
                         # Agora, você pode usar o valor para tomar a ação necessária
             if tipo_selecionado == "opcao1":
-                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?type={nome_card}"
+                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?language=pt&type={nome_card}"
             elif tipo_selecionado == "opcao2":
-                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?attribute={nome_card}"
+                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?language=pt&attribute={nome_card}"
             elif tipo_selecionado == "opcao3":      
-                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?race={nome_card}"
+                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?language=pt&race={nome_card}"
             else:
-                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={nome_card}"
+                        BASE_URL = f"https://db.ygoprodeck.com/api/v7/cardinfo.php?language=pt&name={nome_card}"
 
             cards = []  # Lista para armazenar os dados dos cards
             data = responseApI(BASE_URL)
