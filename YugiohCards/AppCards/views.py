@@ -72,7 +72,7 @@ def visucards(request):
         contexto = {"cards": []}  # Em caso de uma exceção do tipo requests.exceptions.
                                   # RequestException (por exemplo, um erro na solicitação HTTP), imprime uma mensagem de erro e define um contexto com uma lista vazia de cartas.
 
-    return render(request, 'visucards/visu.html', contexto) # Retorna a renderização do template 'visucards/visu.html' com o contexto preparado.
+    return render(request, 'telas/visu.html', contexto) # Retorna a renderização do template 'visucards/visu.html' com o contexto preparado.
 
 def buscar_card(request):
     nome_card = request.GET.get('nome_card', '') # Obtém o parâmetro 'nome_card' da solicitação GET. Se não for fornecido, assume uma string vazia como padrão.
@@ -103,5 +103,5 @@ def buscar_card(request):
         print(f"Erro na solicitação HTTP: {e}")
         contexto = {"cards": []}  # Lista vazia em caso de erro
 
-    return render(request, 'visucards/visu.html', contexto) #     Retorna a renderização do template 'visucards/visu.html' com o contexto preparado.
+    return render(request, 'telas/visu.html', contexto) #     Retorna a renderização do template 'visucards/visu.html' com o contexto preparado.
 
