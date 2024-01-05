@@ -31,13 +31,11 @@ def FilterCard(resultados):
             "attribute": resultados.get("attribute",None),
         }
     return cards_info # Retorna o dicionário cards_info contendo as informações reformatadas da carta.
-
 def responseApI(base):
         response = requests.get(base) # cria uma solicitação HTTP GET usando a biblioteca requests para o URL fornecido como argumento base.
         response.raise_for_status() # verifica se a solicitação HTTP foi bem-sucedida. 
         data = response.json() # analisa a resposta da solicitação como JSON.
         return data #  retorna os dados da resposta da API
-
 def homepage(request):
     return render(request,'home/homepage.html')
 def visucards(request):
@@ -73,7 +71,6 @@ def visucards(request):
                                   # RequestException (por exemplo, um erro na solicitação HTTP), imprime uma mensagem de erro e define um contexto com uma lista vazia de cartas.
 
     return render(request, 'telas/visu.html', contexto) # Retorna a renderização do template 'visucards/visu.html' com o contexto preparado.
-
 def buscar_card(request):
     nome_card = request.GET.get('nome_card', '') # Obtém o parâmetro 'nome_card' da solicitação GET. Se não for fornecido, assume uma string vazia como padrão.
     try:
@@ -104,4 +101,3 @@ def buscar_card(request):
         contexto = {"cards": []}  # Lista vazia em caso de erro
 
     return render(request, 'telas/visu.html', contexto) #     Retorna a renderização do template 'visucards/visu.html' com o contexto preparado.
-

@@ -2,13 +2,38 @@
 {% block title %} YU-GI-OH CARDS{% endblock %}
 
 {% block content %}
+<style>
+div {
+    text-align: center;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+</style>
 <div>
     <div>
         <h1 style="text-align: center;">YU-GI-OH CARDS</h1>
     </div>
-    <div style="text-align: center;">
-        <a href="#"><button>login</button></a>
-        <a href="#"><button>cadastro</button></a>
+    <div>
+        <button>life counter</button>
+        <button>deck</button>
+        <button>buy cards</button>
     </div>
 </div>
 {% endblock %}
